@@ -9,10 +9,10 @@ interface WorkerCardProps {
 export function WorkerCard({ worker }: WorkerCardProps) {
   return (
     <Link to={`/worker/${worker.id}`}>
-      <div className="bg-card rounded-xl shadow-md hover:shadow-lg transition-all duration-150 p-6 border border-border hover:border-primary/30 group">
+      <div className="bg-card rounded-xl shadow-lg hover:shadow-xl transition-all duration-200 p-6 border-2 border-border hover:border-primary/40 group hover:-translate-y-1">
         <div className="flex items-start gap-4">
           <div className="relative">
-            <div className="w-16 h-16 rounded-full bg-secondary flex items-center justify-center text-primary group-hover:bg-primary/10 transition-colors">
+            <div className="w-16 h-16 rounded-full gradient-primary flex items-center justify-center text-primary-foreground group-hover:scale-110 transition-transform shadow-md">
               {worker.photo ? (
                 <img src={worker.photo} alt={worker.name} className="w-full h-full rounded-full object-cover" />
               ) : (
@@ -20,15 +20,15 @@ export function WorkerCard({ worker }: WorkerCardProps) {
               )}
             </div>
             {worker.isWorkingToday && (
-              <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-card" />
+              <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-green-500 rounded-full border-2 border-card shadow-lg animate-pulse-glow" />
             )}
           </div>
           
           <div className="flex-1 min-w-0">
-            <h3 className="font-semibold text-lg text-foreground group-hover:text-primary transition-colors truncate">
+            <h3 className="font-bold text-lg text-foreground group-hover:text-primary transition-colors truncate">
               {worker.name}
             </h3>
-            <p className="text-sm text-muted-foreground mt-1">
+            <p className="text-sm text-muted-foreground mt-1 font-medium">
               {worker.hall} - {worker.subHall}
             </p>
             <p className="text-xs text-muted-foreground mt-1">
