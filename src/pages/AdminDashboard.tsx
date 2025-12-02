@@ -2,9 +2,11 @@ import { useState } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { workers } from '@/data/mockData';
 import { Users, Clock, CheckCircle, Building, Plus, FileText } from 'lucide-react';
+import { useToast } from '@/hooks/use-toast';
 
 export function AdminDashboard() {
   const [dailyMessage, setDailyMessage] = useState<string | null>(null);
+  const { toast } = useToast();
 
   const studentWorkers = workers.filter((w) => w.type === 'student');
   const gmwWorkers = workers.filter((w) => w.type === 'gmw');
@@ -19,6 +21,13 @@ export function AdminDashboard() {
     const hallWorkingToday = hallWorkers.filter((w) => w.isWorkingToday).length;
     return { hall, total: hallWorkers.length, workingToday: hallWorkingToday };
   });
+
+  const showComingSoon = (feature: string) => {
+    toast({
+      title: `${feature} coming soon`,
+      description: 'This action is not wired up yet in this version, but the UI is ready for it.',
+    });
+  };
 
   const generateDailyMessage = () => {
     const today = new Date();
@@ -157,15 +166,24 @@ export function AdminDashboard() {
           <div className="bg-card rounded-xl p-6 border border-border shadow-sm">
             <h2 className="text-xl font-semibold text-foreground mb-4">Quick Actions</h2>
             <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-3">
-              <button className="flex items-center gap-3 p-4 bg-primary/5 hover:bg-primary/10 rounded-lg border border-primary/20 transition-colors">
+              <button
+                className="flex items-center gap-3 p-4 bg-primary/5 hover:bg-primary/10 rounded-lg border border-primary/20 transition-colors"
+                onClick={() => showComingSoon('Add worker')}
+              >
                 <Plus className="w-5 h-5 text-primary" />
                 <span className="font-medium text-foreground">Add New Worker</span>
               </button>
-              <button className="flex items-center gap-3 p-4 bg-accent/5 hover:bg-accent/10 rounded-lg border border-accent/20 transition-colors">
+              <button
+                className="flex items-center gap-3 p-4 bg-accent/5 hover:bg-accent/10 rounded-lg border border-accent/20 transition-colors"
+                onClick={() => showComingSoon('Assign task')}
+              >
                 <Plus className="w-5 h-5 text-accent" />
                 <span className="font-medium text-foreground">Assign Task</span>
               </button>
-              <button className="flex items-center gap-3 p-4 bg-secondary hover:bg-secondary/80 rounded-lg border border-border transition-colors">
+              <button
+                className="flex items-center gap-3 p-4 bg-secondary hover:bg-secondary/80 rounded-lg border border-border transition-colors"
+                onClick={() => showComingSoon('Edit schedules')}
+              >
                 <Clock className="w-5 h-5 text-foreground" />
                 <span className="font-medium text-foreground">Edit Schedules</span>
               </button>

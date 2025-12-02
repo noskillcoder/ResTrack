@@ -85,9 +85,11 @@ export function LoginSelector() {
 
     setIsSubmitting(true);
 
+    const cleanedEmail = signUpData.email.trim().toLowerCase();
+
     try {
       await authService.signUp({
-        email: signUpData.email,
+        email: cleanedEmail,
         password: signUpData.password,
         name: signUpData.name,
         role: signUpData.role,
