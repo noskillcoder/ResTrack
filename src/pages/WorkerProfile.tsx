@@ -39,8 +39,12 @@ export function WorkerProfile() {
       <Navigation />
       <div className="min-h-screen bg-background pb-20 md:pb-8">
         {/* Header */}
-        <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
-          <div className="container mx-auto px-4 py-8">
+        <section className="landing-hero text-white relative overflow-hidden">
+          <div className="landing-orb landing-orb-1" />
+          <div className="landing-orb landing-orb-2" />
+          <div className="landing-orb landing-orb-3" />
+
+          <div className="container mx-auto px-4 py-8 md:py-14 relative z-10">
             <Link
               to={worker.type === 'student' ? '/student-gmws' : '/gmws'}
               className="inline-flex items-center gap-2 mb-4 hover:opacity-80 transition-opacity"
@@ -50,7 +54,7 @@ export function WorkerProfile() {
             </Link>
 
             <div className="flex flex-col md:flex-row items-start md:items-center gap-6">
-              <div className="w-24 h-24 rounded-full bg-primary-foreground/10 flex items-center justify-center border-4 border-primary-foreground/20">
+              <div className="w-24 h-24 rounded-full bg-white/10 flex items-center justify-center border-4 border-white/30 shadow-lg">
                 {worker.photo ? (
                   <img src={worker.photo} alt={worker.name} className="w-full h-full rounded-full object-cover" />
                 ) : (
@@ -59,7 +63,9 @@ export function WorkerProfile() {
               </div>
 
               <div className="flex-1">
-                <h1 className="text-3xl md:text-4xl font-bold mb-2">{worker.name}</h1>
+                <h1 className="text-3xl md:text-4xl font-extrabold mb-2 hero-title">
+                  {worker.name}
+                </h1>
                 <div className="flex flex-wrap gap-4 text-sm opacity-90">
                   <span className="flex items-center gap-1">
                     <Building className="w-4 h-4" />
@@ -69,17 +75,17 @@ export function WorkerProfile() {
                     <Mail className="w-4 h-4" />
                     {worker.email}
                   </span>
-                  <span className="px-3 py-1 bg-primary-foreground/20 rounded-full font-medium">
+                  <span className="px-3 py-1 bg-white/15 rounded-full font-medium">
                     {worker.type === 'student' ? 'Student GMW' : 'GMW'}
                   </span>
                 </div>
               </div>
             </div>
           </div>
-        </div>
+        </section>
 
         {/* Content */}
-        <div className="container mx-auto px-4 py-6 space-y-6">
+        <div className="container mx-auto px-3 md:px-4 py-4 md:py-5 space-y-4">
           {/* Hours Tracker */}
           <HoursTracker scheduled={worker.hoursScheduled} worked={worker.hoursWorked} />
 

@@ -17,9 +17,9 @@ All colors MUST be HSL.
     --popover: 0 0% 100%;
     --popover-foreground: 280 70% 12%;
 
-    --primary: 280 85% 35%;
-    --primary-dark: 280 90% 25%;
-    --primary-light: 280 75% 55%;
+    --primary: 280 90% 25%;
+    --primary-dark: 280 95% 15%;
+    --primary-light: 280 85% 35%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 280 40% 92%;
@@ -80,9 +80,9 @@ All colors MUST be HSL.
     --popover: 280 45% 12%;
     --popover-foreground: 250 40% 96%;
 
-    --primary: 280 80% 55%;
-    --primary-dark: 280 85% 45%;
-    --primary-light: 280 75% 65%;
+    --primary: 280 90% 25%;
+    --primary-dark: 280 95% 15%;
+    --primary-light: 280 85% 35%;
     --primary-foreground: 0 0% 100%;
 
     --secondary: 280 35% 20%;
@@ -101,13 +101,13 @@ All colors MUST be HSL.
 
     --border: 280 30% 22%;
     --input: 280 30% 22%;
-    --ring: 280 80% 60%;
+    --ring: 280 85% 40%;
     
-    --gradient-primary: linear-gradient(135deg, hsl(280 80% 45%), hsl(280 85% 55%));
+    --gradient-primary: linear-gradient(135deg, hsl(280 90% 25%), hsl(280 95% 35%));
     --gradient-accent: linear-gradient(135deg, hsl(45 100% 55%), hsl(45 100% 65%));
-    --gradient-purple-gold: linear-gradient(135deg, hsl(280 80% 55%), hsl(45 100% 60%));
+    --gradient-purple-gold: linear-gradient(135deg, hsl(280 90% 35%), hsl(45 100% 60%));
     
-    --shadow-glow: 0 0 40px hsl(280 80% 55% / 0.4);
+    --shadow-glow: 0 0 40px hsl(280 90% 25% / 0.4);
     --shadow-accent: 0 8px 25px -4px hsl(45 100% 60% / 0.5);
     --sidebar-background: 240 5.9% 10%;
     --sidebar-foreground: 240 4.8% 95.9%;
@@ -133,14 +133,298 @@ All colors MUST be HSL.
 @layer utilities {
   .gradient-primary {
     background: var(--gradient-primary);
+    position: relative;
+  }
+
+  /* Landing / hero styling inspired by provided design */
+  .landing-hero {
+    background: linear-gradient(135deg, #4a1e70 0%, #1a1a2e 50%, #7b2b85 100%);
+  }
+
+  .landing-orb {
+    position: absolute;
+    border-radius: 9999px;
+    filter: blur(60px);
+    opacity: 0.4;
+    animation: landing-float 20s infinite ease-in-out;
+  }
+
+  .landing-orb-1 {
+    width: 260px;
+    height: 260px;
+    background: #4a1e70;
+    top: -80px;
+    left: -80px;
+    animation-delay: 0s;
+  }
+
+  .landing-orb-2 {
+    width: 220px;
+    height: 220px;
+    background: #ffc107;
+    top: 40%;
+    right: -60px;
+    animation-delay: 6s;
+  }
+
+  .landing-orb-3 {
+    width: 260px;
+    height: 260px;
+    background: #7b2b85;
+    bottom: -80px;
+    left: 45%;
+    animation-delay: 12s;
+  }
+
+  @keyframes landing-float {
+    0%, 100% {
+      transform: translate(0, 0) scale(1);
+    }
+    33% {
+      transform: translate(80px, -60px) scale(1.05);
+    }
+    66% {
+      transform: translate(-40px, 60px) scale(0.95);
+    }
+  }
+
+  .hero-title {
+    background: linear-gradient(135deg, #ffffff, #ffc107);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+
+  .hero-visual-wrapper {
+    position: relative;
+    display: flex;
+    justify-content: center;
+  }
+
+  .dashboard-mockup-card {
+    width: 100%;
+    max-width: 420px;
+    border-radius: 1.25rem;
+    padding: 1.5rem 1.75rem;
+    background: rgba(17, 24, 39, 0.9);
+    border: 1px solid rgba(148, 163, 184, 0.35);
+    box-shadow: 0 20px 60px rgba(15, 23, 42, 0.7);
+    backdrop-filter: blur(16px);
+    animation: float-gentle 6s infinite ease-in-out;
+  }
+
+  .mockup-window-dots {
+    display: flex;
+    gap: 0.4rem;
+    margin-bottom: 1.25rem;
+  }
+
+  .mockup-window-dots span {
+    width: 0.6rem;
+    height: 0.6rem;
+    border-radius: 9999px;
+    background: #ff5f56;
+  }
+
+  .mockup-window-dots span:nth-child(2) {
+    background: #ffbd2e;
+  }
+
+  .mockup-window-dots span:nth-child(3) {
+    background: #27c93f;
+  }
+
+  .mockup-grid {
+    display: grid;
+    gap: 0.85rem;
+  }
+
+  .mockup-stat-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: rgba(15, 23, 42, 0.9);
+    border-left: 4px solid #ffc107;
+    transition: transform 0.2s ease, background 0.2s ease;
+  }
+
+  .mockup-stat-card:hover {
+    transform: translateX(6px);
+    background: rgba(15, 23, 42, 1);
+  }
+
+  .mockup-stat-label {
+    font-size: 0.75rem;
+    color: rgba(226, 232, 240, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+  }
+
+  .mockup-stat-value {
+    font-size: 1.35rem;
+    font-weight: 700;
+    color: #ffc107;
+    margin-top: 0.15rem;
+  }
+
+  .mockup-stat-icon {
+    font-size: 1.4rem;
+  }
+
+  @keyframes float-gentle {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-10px);
+    }
+  }
+
+  .feature-pill {
+    display: flex;
+    gap: 0.75rem;
+    padding: 0.9rem 1rem;
+    border-radius: 0.9rem;
+    background: rgba(255, 255, 255, 0.6);
+    box-shadow: 0 10px 30px rgba(148, 163, 184, 0.4);
+  }
+
+  .dark .feature-pill {
+    background: rgba(15, 23, 42, 0.8);
+    box-shadow: 0 10px 30px rgba(15, 23, 42, 0.8);
+  }
+
+  .feature-pill-icon {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 2.4rem;
+    height: 2.4rem;
+    border-radius: 0.8rem;
+    background: linear-gradient(135deg, #4a1e70, #7b2b85);
+    font-size: 1.25rem;
+  }
+
+  .feature-pill-title {
+    font-size: 0.85rem;
+    font-weight: 600;
+  }
+
+  .feature-pill-text {
+    font-size: 0.8rem;
+    color: hsl(250 15% 35%);
+  }
+
+  .dark .feature-pill-text {
+    color: hsl(250 20% 85%);
   }
   
   .gradient-accent {
     background: var(--gradient-accent);
   }
   
+  /* Rotated landscape black-to-dark-purple gradient background */
   .gradient-purple-gold {
-    background: var(--gradient-purple-gold);
+    background: linear-gradient(to right, #000000 0%, #1a0033 30%, #4a0080 70%, #6a1b9a 100%);
+    position: relative;
+    min-height: 140px;
+  }
+  
+  @media (max-width: 768px) {
+    .gradient-purple-gold {
+      min-height: 120px;
+    }
+  }
+  
+  .gradient-purple-gold::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at right center, rgba(106, 27, 154, 0.6) 0%, transparent 70%);
+    z-index: 1;
+  }
+  
+  .gradient-purple-gold > * {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .background-image-header {
+    background: linear-gradient(to right, #000000 0%, #1a0033 30%, #4a0080 70%, #6a1b9a 100%);
+    position: relative;
+    min-height: 140px;
+  }
+  
+  @media (max-width: 768px) {
+    .background-image-header {
+      min-height: 120px;
+    }
+  }
+  
+  .background-image-header::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at right center, rgba(106, 27, 154, 0.7) 0%, transparent 70%);
+    z-index: 1;
+  }
+  
+  .background-image-header > * {
+    position: relative;
+    z-index: 2;
+  }
+  
+  .background-image-nav {
+    background: linear-gradient(to right, #000000 0%, #1a0033 40%, #4a0080 80%, #6a1b9a 100%);
+    position: relative;
+  }
+  
+  .background-image-nav::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at right center, rgba(106, 27, 154, 0.8) 0%, transparent 60%);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    z-index: 1;
+  }
+  
+  .background-image-nav > * {
+    position: relative;
+    z-index: 2;
+  }
+  
+  /* Fallback gradient */
+  .gradient-purple-gold,
+  .background-image-header,
+  .background-image-nav {
+    background-color: #1a0033;
+  }
+  
+  /* Alternative landscape images for variety */
+  .bg-landscape-1 {
+    background-image: url('https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=1920&q=80');
+  }
+  
+  .bg-landscape-2 {
+    background-image: url('https://images.unsplash.com/photo-1579546929518-9e396f3cc809?w=1920&q=80');
+  }
+  
+  .bg-landscape-3 {
+    background-image: url('https://images.unsplash.com/photo-1557683316-973673baf926?w=1920&q=80');
+  }
+  
+  .bg-landscape-4 {
+    background-image: url('https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?w=1920&q=80');
+  }
+  
+  .bg-landscape-purple {
+    background-image: url('https://images.unsplash.com/photo-1519682337058-a94d519337bc?w=1920&q=80');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
   }
   
   .shadow-glow {

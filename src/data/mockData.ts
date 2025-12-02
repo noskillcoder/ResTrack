@@ -1,15 +1,22 @@
 export type WorkerType = 'student' | 'gmw';
+export type UserRole = 'admin' | 'worker';
 export type Hall = 'Crawford' | 'McElroy' | 'Preska' | 'Julia Sears';
 export type SubHall = 'A' | 'B' | 'C' | 'D' | 'E' | 'F' | 'G' | 'H' | 'I' | 'J' | 'K' | 'L';
 export type Priority = 'Normal' | 'High';
-export type TaskStatus = 'Not Started' | 'In Progress' | 'Completed';
+export type TaskStatus = 'Available' | 'In Progress' | 'Completed';
 
 export interface Task {
   id: string;
   title: string;
+  description?: string;
   location: string;
   priority: Priority;
   status: TaskStatus;
+  assignedTo?: string; // worker id
+  assignedByName?: string; // admin name
+  createdAt: Date;
+  dueDate: Date;
+  completedAt?: Date;
 }
 
 export interface Worker {

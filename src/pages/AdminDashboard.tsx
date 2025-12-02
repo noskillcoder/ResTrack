@@ -1,8 +1,11 @@
+import { useState } from 'react';
 import { Navigation } from '@/components/Navigation';
 import { workers } from '@/data/mockData';
-import { Users, Clock, CheckCircle, Building, Plus } from 'lucide-react';
+import { Users, Clock, CheckCircle, Building, Plus, FileText } from 'lucide-react';
 
 export function AdminDashboard() {
+  const [dailyMessage, setDailyMessage] = useState<string | null>(null);
+
   const studentWorkers = workers.filter((w) => w.type === 'student');
   const gmwWorkers = workers.filter((w) => w.type === 'gmw');
   const workingToday = workers.filter((w) => w.isWorkingToday);
@@ -17,20 +20,78 @@ export function AdminDashboard() {
     return { hall, total: hallWorkers.length, workingToday: hallWorkingToday };
   });
 
+  const generateDailyMessage = () => {
+    const today = new Date();
+    const dateString = today.toLocaleDateString(undefined, {
+      weekday: 'long',
+      month: 'long',
+      day: 'numeric',
+    });
+
+    const offWorkers = workers.filter((w) => !w.isWorkingToday);
+    const offNames = offWorkers.map((w) => w.name).join(', ') || 'None';
+    const workingNames = workingToday.map((w) => w.name).join(', ') || 'None';
+
+    const message = [
+      'Good afternoon,',
+      '',
+      'Everyone!',
+      '',
+      `${dateString}`,
+      '',
+      `Off today: ${offNames}.`,
+      '',
+      "Today's workers:",
+      workingNames,
+      '',
+      "Today's tasks:",
+      '• Bring two cases of ♻️ bags to the office hallway in the Dining Center.',
+      '• Empty the large round ♻️ bin in the main Res. Life office workroom and return it (ask Jana if unsure).',
+      '• Empty the purple ♻️ bin near Crawford C-Wing if needed.',
+      '• Empty the purple ♻️ bins in the Salt Room.',
+      '• Take out trash in H2 and H1 if needed.',
+      '• Empty tilt carts in Julia Sears, Crawford, McElroy, and the Food Pantry (if not done yesterday).',
+      '',
+      'Trash and ♻️ are priorities!',
+      '',
+      'After these are done, vacuum floor lounges in:',
+      '- Crawford A, B, C, D',
+      '- McElroy E, F, G, H',
+      '- Preska I, J, K, L',
+      '- Julia Sears',
+      '',
+      'Remember to turn off lights in the Salt Room and Carkoski Room 12.',
+      'The Salt Room lights were left on yesterday.',
+      'Check the lights behind Chet’s if you know the areas to look.',
+      '',
+      'Thank you!',
+    ].join('\n');
+
+    setDailyMessage(message);
+  };
+
   return (
     <>
       <Navigation />
       <div className="min-h-screen bg-background pb-20 md:pb-8">
         {/* Header */}
-        <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
-          <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">Admin Dashboard</h1>
-            <p className="text-lg opacity-90">Manage workers, tasks, and schedules</p>
+        <section className="landing-hero text-white relative overflow-hidden">
+          <div className="landing-orb landing-orb-1" />
+          <div className="landing-orb landing-orb-2" />
+          <div className="landing-orb landing-orb-3" />
+
+          <div className="container mx-auto px-4 py-10 md:py-16 relative z-10">
+            <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold mb-2 hero-title">
+              Admin Dashboard
+            </h1>
+            <p className="text-sm md:text-base text-white/80 max-w-xl">
+              Get a live snapshot of workers, tasks, and hours across every hall — all in one place.
+            </p>
           </div>
-        </div>
+        </section>
 
         {/* Content */}
-        <div className="container mx-auto px-4 py-6 space-y-6">
+        <div className="container mx-auto px-3 md:px-4 py-4 md:py-5 space-y-4">
           {/* Quick Stats */}
           <div className="grid sm:grid-cols-2 lg:grid-cols-4 gap-4">
             <div className="bg-card rounded-xl p-6 border border-border shadow-sm">
@@ -108,6 +169,13 @@ export function AdminDashboard() {
                 <Clock className="w-5 h-5 text-foreground" />
                 <span className="font-medium text-foreground">Edit Schedules</span>
               </button>
+              <button
+                className="flex items-center gap-3 p-4 bg-primary/5 hover:bg-primary/10 rounded-lg border border-primary/20 transition-colors sm:col-span-2 lg:col-span-1"
+                onClick={generateDailyMessage}
+              >
+                <FileText className="w-5 h-5 text-primary" />
+                <span className="font-medium text-foreground">Generate Daily Message</span>
+              </button>
             </div>
           </div>
 
@@ -140,6 +208,19 @@ export function AdminDashboard() {
               </table>
             </div>
           </div>
+
+          {/* Generated Daily Message */}
+          {dailyMessage && (
+            <div className="bg-card rounded-xl p-6 border border-border shadow-sm">
+              <h2 className="text-xl font-semibold text-foreground mb-4">Daily Message</h2>
+              <p className="text-xs text-muted-foreground mb-2">
+                Copy and paste this into your email or announcements.
+              </p>
+              <pre className="whitespace-pre-wrap text-sm bg-muted/40 rounded-lg p-4 border border-border">
+{dailyMessage}
+              </pre>
+            </div>
+          )}
 
           {/* Who's Working Today */}
           <div className="bg-card rounded-xl p-6 border border-border shadow-sm">

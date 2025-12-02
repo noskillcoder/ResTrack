@@ -33,20 +33,29 @@ export function WorkersList({ type }: WorkersListProps) {
       <Navigation />
       <div className="min-h-screen bg-background pb-20 md:pb-8">
         {/* Header */}
-        <div className="bg-gradient-to-br from-primary to-primary/80 text-primary-foreground">
-          <div className="container mx-auto px-4 py-8">
-            <h1 className="text-3xl md:text-4xl font-bold mb-2">
-              {type === 'student' ? 'Student GMWs' : 'GMWs'}
-            </h1>
-            <p className="text-lg opacity-90">
-              {filteredWorkers.length} workers found
-            </p>
+        <section className="landing-hero text-white relative overflow-hidden">
+          <div className="landing-orb landing-orb-1" />
+          <div className="landing-orb landing-orb-2" />
+          <div className="landing-orb landing-orb-3" />
+
+          <div className="container mx-auto px-4 py-10 md:py-16 relative z-10">
+            <div className="flex flex-col gap-4">
+              <h1 className="text-2xl md:text-3xl lg:text-4xl font-extrabold hero-title">
+                {type === 'student' ? 'Student GMWs' : 'GMWs'}
+              </h1>
+              <p className="text-sm md:text-base text-white/80 max-w-xl">
+                Browse all {type === 'student' ? 'student general maintenance workers' : 'general maintenance workers'} by hall, sub‑hall, and name.
+              </p>
+              <p className="text-xs md:text-sm text-white/70">
+                {filteredWorkers.length} workers matched your current filters.
+              </p>
+            </div>
           </div>
-        </div>
+        </section>
 
         {/* Filters */}
-        <div className="container mx-auto px-4 py-6">
-          <div className="bg-card rounded-xl p-4 md:p-6 shadow-md border border-border mb-6">
+        <div className="container mx-auto px-3 md:px-4 py-4 md:py-5">
+          <div className="bg-card rounded-xl p-3 md:p-4 shadow-md border border-border mb-4">
             <div className="flex items-center gap-2 mb-4">
               <Filter className="w-5 h-5 text-primary" />
               <h2 className="font-semibold text-lg text-foreground">Filters</h2>
