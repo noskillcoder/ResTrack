@@ -1,6 +1,6 @@
-## ResTrack – MSU Mankato Worker Management
+## ResTrack
 
-This app helps MSU Mankato residence hall staff manage:
+ResTrack helps residence hall teams manage:
 
 - Worker sign-in by role (admin vs worker, including student / GMW workers)
 - Task feed and task posting
